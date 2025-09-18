@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cezary Ziarkowski - Certified AI Business Expert</title>
+    <!-- ✅ Favicon w kolorach marki, bez zewnętrznych plików -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='16' fill='%231e293b'/%3E%3Cpath d='M50 20 L78 35 L78 65 L50 80 L22 65 L22 35 Z' fill='%231d4ed8'/%3E%3Cpath d='M50 50 L78 35 L50 20 L22 35 Z' fill='%23f59e0b'/%3E%3C/svg%3E">
+    
+    <!-- ✅ Czcionki eksperckie, ale przyjazne - zgodnie ze stylem -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;700&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* 🎨 TWOJA UNIKALNA PALETA KOLORÓW */
+            --blue-trust: #1d4ed8;
+            --blue-trust-light: #2563eb;
+            --amber-creative: #f59e0b;
+            --navy-professional: #1e293b;
+            --gray-soft: #f8fafc;
+            --text-primary: var(--navy-professional);
+            --text-secondary: #475569;
+
+            /* ✅ Typografia zgodna ze stylem */
+            --font-main: 'IBM Plex Sans', sans-serif;
+            --font-header: 'Space Grotesk', sans-serif;
+            --font-data: 'JetBrains Mono', monospace;
+
+            /* ✅ Przestrzeń i oddech w designie */
+            --space-base: 1rem;
+            --space-md: 1.75rem;
+            --space-lg: 3.75rem;
+            --space-xl: 4.25rem;
+        }
+
+        /* --- Reset & Podstawowe Style --- */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-main);
+            color: var(--text-primary);
+            background-color: var(--gray-soft);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            padding-top: 80px; /* Dodatkowe miejsce na stałe menu */
+        }
+        
+        /* --- MENU NAWIGACYJNE --- */
+        .main-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid #e2e8f0;
+            transition: box-shadow 0.2s;
+        }
+        
+        .main-nav.scrolled {
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .nav-logo {
+            font-family: var(--font-header);
+            font-weight: 700;
+            font-size: 1.25rem;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--blue-trust);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+        
+        .hamburger-icon {
+             width: 24px;
+             height: 2px;
+             background-color: var(--text-primary);
+             position: relative;
+             transition: background-color 0.2s;
+        }
+        
+        .hamburger-icon::before, .hamburger-icon::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            width: 24px;
+            height: 2px;
+            background-color: var(--text-primary);
+            transition: transform 0.3s, top 0.3s;
+        }
+
+        .hamburger-icon::before { top: -8px; }
+        .hamburger-icon::after { top: 8px; }
+        
+        .nav-open .hamburger-icon { background-color: transparent; }
+        .nav-open .hamburger-icon::before { transform: rotate(45deg); top: 0; }
+        .nav-open .hamburger-icon::after { transform: rotate(-45deg); top: 0; }
+
+
+        /* --- Layout & Kontenery --- */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .section {
+            padding: var(--space-lg) 1.5rem var(--space-xl);
+        }
+
+
+        /* --- Typografia --- */
+        h1, h2, h3 {
+            font-family: var(--font-header);
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--navy-professional);
+        }
+
+        h1 {
+            font-size: 2.5rem; /* Mobile first */
+            margin-bottom: var(--space-base);
+        }
+
+        h2 {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        p {
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: var(--text-secondary);
+        }
+
+        .hero-subheadline {
+            font-size: 1.25rem;
+            max-width: 550px;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .highlight-data {
+            font-family: var(--font-data);
+            font-weight: 500;
+            color: var(--blue-trust);
+        }
+        
+        .highlight-amber {
+            color: var(--amber-creative);
+        }
+
+        /* --- Komponenty --- */
+        .cta-button {
+            display: inline-block;
+            background-color: var(--blue-trust);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-family: var(--font-header);
+            font-weight: 500;
+            font-size: 1rem;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+        }
+
+        .cta-button:hover {
+            background-color: var(--blue-trust-light);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(29, 78, 216, 0.2);
+        }
+
+        .card-grid {
+            display: grid;
+            gap: 1.75rem;
+        }
+
+        .trust-card {
+            background-color: #fff;
+            padding: 2rem 1.5rem;
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 12px rgba(29, 78, 216, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative; 
+            overflow: hidden; 
+        }
+        
+        .trust-card::before {
+            content: "";
+            position: absolute;
+            left: var(--mouse-x, 0);
+            top: var(--mouse-y, 0);
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle at center, rgba(37, 99, 235, 0.15) 0%, rgba(37, 99, 235, 0) 70%);
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: opacity 0.4s;
+            pointer-events: none;
+        }
+        
+        .trust-card:hover::before {
+            opacity: 1;
+        }
+
+        .trust-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(29, 78, 216, 0.1);
+        }
+
+        .trust-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .trust-card .icon {
+            display: block;
+            width: 48px;
+            height: 48px;
+            margin-bottom: 1rem;
+            color: var(--blue-trust);
+        }
+
+        /* --- Sekcje --- */
+        .hero {
+            padding-top: 5rem;
+            padding-bottom: 5rem;
+        }
+
+        .hero .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero-text {
+            max-width: 650px;
+        }
+        
+        .profile-image-wrapper {
+            margin-bottom: 2rem;
+            max-width: 200px;
+        }
+
+        .profile-image {
+            width: 100%;
+            height: auto;
+            border-radius: 50%;
+            border: 6px solid #fff;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease-in-out; /* NOWA ZMIANA: Płynne przejście dla powiększenia */
+        }
+        
+        /* NOWA ZMIANA: Efekt powiększenia zdjęcia po najechaniu */
+        .profile-image:hover {
+            transform: scale(1.05);
+        }
+        
+        #trust {
+            position: relative;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23e2e8f0' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        #testimonials {
+            background-color: #fff;
+        }
+        .testimonial-grid {
+            display: grid;
+            gap: 1.75rem;
+        }
+        .testimonial-card {
+            background: var(--gray-soft);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+        }
+        .testimonial-card blockquote {
+            margin: 0 0 1.5rem 0;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--text-secondary);
+            border-left: 3px solid var(--blue-trust);
+            padding-left: 1.5rem;
+        }
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .testimonial-author img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .author-info strong {
+            display: block;
+            color: var(--text-primary);
+        }
+        .author-info span {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        #certs {
+            background-color: var(--gray-soft);
+        }
+        
+        .certs-image {
+            display: block;
+            max-width: 100%;
+            margin: 0 auto;
+            border-radius: 16px;
+        }
+
+        #cooperation {
+            background-color: #fff;
+        }
+        .cooperation-grid {
+            display: grid;
+            gap: 1.75rem;
+        }
+        .cooperation-card {
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+        }
+        .cooperation-card .icon {
+            width: 48px;
+            height: 48px;
+            color: var(--blue-trust);
+            margin-bottom: 1rem;
+        }
+        .cooperation-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .cooperation-card p {
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+        .cooperation-card ul {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 2rem;
+            flex-grow: 1;
+        }
+        .cooperation-card li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .cooperation-card li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--blue-trust);
+            font-weight: bold;
+        }
+
+
+        .contact-section {
+            background-color: var(--amber-creative);
+            text-align: center;
+            border-radius: 16px;
+            padding: 3rem 1.5rem;
+            margin-top: 3rem;
+        }
+        
+        .contact-section h2, .contact-section p {
+            color: var(--navy-professional);
+        }
+
+        .contact-section p {
+            max-width: 600px;
+            margin: 0 auto 2rem auto;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-width: 450px;
+            margin: 0 auto;
+        }
+
+        .contact-input {
+            padding: 14px;
+            border-radius: 28px;
+            border: 1px solid transparent;
+            font-family: var(--font-main);
+            font-size: 1rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .contact-input::placeholder {
+            color: #94a3b8;
+        }
+        
+        .contact-input:focus {
+            outline: none;
+            border-color: var(--blue-trust-light);
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.5);
+        }
+        
+        .contact-button {
+            background-color: var(--navy-professional);
+            border-radius: 28px;
+        }
+        
+        .contact-button:hover {
+             background-color: #334155;
+             box-shadow: 0 4px 15px rgba(30, 41, 59, 0.2);
+        }
+        
+        .footer {
+            background-color: var(--navy-professional);
+            color: #cbd5e1;
+            padding: 4rem 1.5rem 2rem;
+        }
+        .footer-container {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+            max-width: 1100px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .footer-top {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+        }
+        .footer-brand h3 {
+            font-family: var(--font-header);
+            color: #fff;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .footer-brand p {
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+        .footer-nav ul, .footer-social ul {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+        }
+        .footer-nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .footer-nav a:hover {
+            color: #fff;
+        }
+        .footer-social a {
+            color: #cbd5e1;
+            transition: color 0.2s;
+        }
+        .footer-social a:hover {
+            color: #fff;
+        }
+        .footer-social svg {
+            width: 24px;
+            height: 24px;
+        }
+        .footer-bottom {
+            border-top: 1px solid #334155;
+            padding-top: 2rem;
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+
+        /* --- 📱 RESPONSIVE Z CHARAKTEREM (Mobile First) --- */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                gap: 0;
+                padding: 1rem 0;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            }
+            .nav-links li {
+                width: 100%;
+                text-align: center;
+            }
+            .nav-links a {
+                display: block;
+                padding: 1rem;
+                width: 100%;
+            }
+            .nav-open .nav-links {
+                display: flex;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            h1 { font-size: 3.25rem; }
+            .card-grid, .testimonial-grid, .cooperation-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-top { flex-direction: row; }
+            .footer-container { text-align: left; }
+        }
+        
+        @media (min-width: 1024px) {
+            .hero .container {
+                flex-direction: row-reverse;
+                justify-content: space-between;
+                gap: 3rem;
+                text-align: left;
+            }
+            .profile-image-wrapper {
+                 margin-bottom: 0;
+                 min-width: 280px;
+            }
+            .card-grid, .testimonial-grid, .cooperation-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+    </style>
+</head>
+<body>
+    
+    <nav class="main-nav" id="main-nav">
+        <div class="nav-container">
+            <a href="#start" class="nav-logo">Cezary Ziarkowski</a>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#start">Start</a></li>
+                <li><a href="#trust">Doświadczenie</a></li>
+                <li><a href="#kontakt">Kontakt</a></li>
+            </ul>
+            <button class="hamburger" id="hamburger">
+                <div class="hamburger-icon"></div>
+            </button>
+        </div>
+    </nav>
+
+    <header id="start" class="hero section">
+        <div class="container">
+            <div class="profile-image-wrapper">
+                <img src="cezary-profilowe.jpg" alt="Zdjęcie profilowe Cezarego" class="profile-image">
+            </div>
+            <div class="hero-text">
+                <!-- NOWA ZMIANA: Nagłówek i skrypt zostaną zaktualizowane dla nowego układu -->
+                <h1 id="hero-title">Agent AI – jedyny asystent, którego naprawdę potrzebujesz</h1>
+                <p class="hero-subheadline">
+                    Jestem Cezary, Certified AI Business Expert. Z <span class="highlight-data">30-letnim</span> doświadczeniem biznesowo-finansowym pomagam przedsiębiorcom wdrażać AI skutecznie, bezpiecznie i z realnym zwrotem z inwestycji.
+                </p>
+                <a href="#kontakt" class="cta-button">Umów darmową konsultację</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="trust" class="section">
+            <div class="container">
+                <h2>Moje podejście to suma 3 kluczowych kompetencji</h2>
+                <div class="card-grid">
+                    <div class="trust-card">
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-15c-.621 0-1.125-.504-1.125-1.125v-9.75c0-.621.504-1.125 1.125-1.125h.375m15-1.5v-1.5a.75.75 0 00-.75-.75H3.75a.75.75 0 00-.75.75v1.5m15 0a3 3 0 00-3-3H6a3 3 0 00-3 3m15 0a3 3 0 00-3-3H6a3 3 0 00-3 3m15 0a3 3 0 00-3-3H6a3 3 0 00-3 3" /></svg>
+                        <h3>Doświadczenie CFO/COO</h3>
+                        <p>Patrzę na AI przez pryzmat P&L, nie technologicznych nowinek. Znam realia zarządcze i wiem, że liczy się przede wszystkim rentowny business case.</p>
+                    </div>
+
+                    <div class="trust-card">
+                         <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        <h3>Certyfikowana Wiedza AI</h3>
+                        <p>Najwyższy poziom certyfikacji <span class="highlight-data">CAIBE</span> to Twoja gwarancja, że strategia opiera się na aktualnej i sprawdzonej wiedzy, a nie na medialnym szumie.</p>
+                    </div>
+
+                    <div class="trust-card">
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" /></svg>
+                        <h3>AI + Biznes + Finanse</h3>
+                        <p>Łączę trzy światy, by dostarczać kompletne rozwiązania. Rozumiem polskie realia prawne, finansowe i formalne, minimalizując ryzyko wdrożeniowe.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonials" class="section">
+            <div class="container">
+                <h2>Co mówią moi klienci</h2>
+                <div class="testimonial-grid">
+                    <!-- Rekomendacja 1 -->
+                    <div class="testimonial-card">
+                        <blockquote>Cezary ma unikalną zdolność tłumaczenia skomplikowanych koncepcji AI na konkretne działania biznesowe. W końcu rozumiem, jak możemy to wykorzystać, nie wydając fortuny.</blockquote>
+                        <div class="testimonial-author">
+                            <img src="https://placehold.co/100x100/e2e8f0/475569?text=AK" alt="Avatar klienta">
+                            <div class="author-info">
+                                <strong>Anna Kowalska</strong>
+                                <span>CEO, Innowacyjne Rozwiązania sp. z o.o.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Rekomendacja 2 -->
+                    <div class="testimonial-card">
+                        <blockquote>Współpraca z Cezarym to czysta przyjemność. Jego doświadczenie finansowe było kluczowe przy ocenie rentowności naszego projektu AI. Uniknęliśmy dzięki niemu wielu pułapek.</blockquote>
+                        <div class="testimonial-author">
+                            <img src="https://placehold.co/100x100/e2e8f0/475569?text=PN" alt="Avatar klienta">
+                            <div class="author-info">
+                                <strong>Piotr Nowak</strong>
+                                <span>Dyrektor Finansowy, Tech-Invest S.A.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Rekomendacja 3 -->
+                    <div class="testimonial-card">
+                        <blockquote>Jako startup potrzebowaliśmy kogoś, kto rozumie zarówno technologię, jak i realia rynkowe. Cezary idealnie połączył te dwa światy, pomagając nam zbudować solidną strategię.</blockquote>
+                        <div class="testimonial-author">
+                            <img src="https://placehold.co/100x100/e2e8f0/475569?text=MZ" alt="Avatar klienta">
+                            <div class="author-info">
+                                <strong>Marta Zielińska</strong>
+                                <span>Co-founder, FutureAI Labs</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="certs" class="section">
+            <div class="container">
+                <h2>Moje Certyfikaty</h2>
+                <img src="certyfikaty-caibe.jpg" alt="Certyfikaty CAIBA, CAIBP, CAIBE" class="certs-image">
+            </div>
+        </section>
+
+        <section id="cooperation" class="section">
+            <div class="container">
+                <h2>Oferta</h2>
+                <div class="cooperation-grid">
+                    <!-- Karta 1: Enterprise -->
+                    <div class="cooperation-card">
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h6M9 11.25h6m-6 4.5h6M6.75 21v-2.25a2.25 2.25 0 012.25-2.25h6a2.25 2.25 0 012.25 2.25V21" /></svg>
+                        <h3>Enterprise AI Strategy & Advisory</h3>
+                        <p>Pomagam zarządom małych i średnich firm wdrażać AI świadomie: od wizji po bezpieczną realizację.</p>
+                        <ul>
+                            <li>Strategia AI i transformacja</li>
+                            <li>Due diligence projektów AI</li>
+                            <li>Zarządzanie ryzykiem i compliance</li>
+                        </ul>
+                        <a href="#kontakt" class="cta-button">Zapytaj o ofertę</a>
+                    </div>
+                    <!-- Karta 2: Startup -->
+                    <div class="cooperation-card">
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.63 2.45m5.96 11.92a14.98 14.98 0 01-5.841 2.58m-5.841-2.58A14.98 14.98 0 012.25 5.13m3.98-2.58A14.98 14.98 0 019.63 2.45m0 9.62a6 6 0 00-5.84-7.38v4.8m5.84 2.58a6 6 0 01-5.84-2.58m0 0A14.98 14.98 0 012.25 5.13m12.48-2.58A14.98 14.98 0 0117.75 5.13" /></svg>
+                        <h3>PR for busy Professionals</h3>
+                        <p>Twoja marka osobista — działa nawet wtedy, gdy śpisz. 30 minut tygodniowo = pełna obecność online.</p>
+                         <ul>
+                            <li>Strategia rozwoju marki osobistej</li>
+                            <li>System tworzenia treści ze wsparciem AI</li>
+                            <li>Budowanie pozycji eksperta</li>
+                        </ul>
+                        <a href="#kontakt" class="cta-button">Porozmawiajmy</a>
+                    </div>
+                    <!-- Karta 3: Local Business -->
+                    <div class="cooperation-card">
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 21v-7.5a.75.75 0 01.75-.75h3a.75.75 0 01.75.75V21m-4.5 0H2.36m11.14 0H18m0 0h2.64m-13.5 0L12 18m3-9V9A2.25 2.25 0 0012.75 6.75 2.25 2.25 0 0010.5 9v3.75m-3.75 0h7.5M12 15.75l-3.75-3.75" /></svg>
+                        <h3>Local Business AI Solutions</h3>
+                        <p>Dla małych, lokalnych firm szukających prostych i skutecznych narzędzi AI do poprawy efektywności.</p>
+                         <ul>
+                            <li>Automatyzacja procesów</li>
+                            <li>Obsługa klienta z AI</li>
+                            <li>Gotowe, tanie rozwiązania</li>
+                        </ul>
+                        <a href="#kontakt" class="cta-button">Sprawdź rozwiązania</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="kontakt" class="section">
+            <div class="container">
+                <div class="contact-section">
+                    <h2>Zacznijmy rozmowę o Twoim biznesie</h2>
+                    <p>
+                        Masz pytania o to, jak AI może pomóc w Twoim biznesie? Umów się na darmową 30-minutową konsultację. Pokażę Ci konkretne możliwości i przykłady zastosowań.
+                    </p>
+                    <form class="contact-form" action="#" method="POST">
+                        <input type="text" name="name" class="contact-input" placeholder="Imię i nazwisko" required>
+                        <input type="email" name="email" class="contact-input" placeholder="Adres e-mail" required>
+                        <input type="text" name="company" class="contact-input" placeholder="Nazwa firmy" required>
+                        <button type="submit" class="cta-button contact-button">Wyślij wiadomość</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <h3>Cezary Ziarkowski</h3>
+                    <p>Certified AI Business Expert</p>
+                </div>
+                <nav class="footer-nav">
+                    <ul>
+                        <li><a href="#start">Start</a></li>
+                        <li><a href="#trust">Doświadczenie</a></li>
+                        <li><a href="#kontakt">Kontakt</a></li>
+                    </ul>
+                </nav>
+                <div class="footer-social">
+                    <ul>
+                        <li><a href="#" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.25 6.5 1.75 1.75 0 016.5 8.25zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.62 1.62 0 0013 14.19a.48.48 0 000 .25V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"></path></svg></a></li>
+                        <li><a href="#" aria-label="X/Twitter"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2025 Cezary Ziarkowski. Wszelkie prawa zastrzeżone.
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        const nav = document.getElementById('main-nav');
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('nav-links');
+
+        hamburger.addEventListener('click', () => {
+            nav.classList.toggle('nav-open');
+        });
+
+        navLinks.addEventListener('click', (e) => {
+            if (e.target.tagName === 'A') {
+                nav.classList.remove('nav-open');
+            }
+        });
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const heroTitle = document.getElementById('hero-title');
+            if (heroTitle) {
+                const text = heroTitle.textContent;
+                heroTitle.textContent = '';
+                let i = 0;
+                
+                // Pokaż kursor przed rozpoczęciem pisania
+                heroTitle.style.borderRight = '3px solid var(--amber-creative)';
+                
+                function type() {
+                    if (i < text.length) {
+                        heroTitle.textContent += text.charAt(i);
+                        i++;
+                        setTimeout(type, 85); // Szybkość pisania (w ms)
+                    } else {
+                        // ZAKOŃCZONO PISANIE - KURSOR ZNIKA
+                        heroTitle.style.borderRight = '3px solid transparent';
+                    }
+                }
+                
+                // Rozpocznij pisanie po krótkim opóźnieniu
+                setTimeout(type, 500);
+            }
+
+            // Skrypt do efektu "błysku" na kartach
+            const cards = document.querySelectorAll('.trust-card, .cooperation-card');
+            cards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    card.style.setProperty('--mouse-x', `${x}px`);
+                    card.style.setProperty('--mouse-y', `${y}px`);
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
+
